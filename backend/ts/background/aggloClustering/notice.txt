@@ -1,0 +1,19 @@
+This project contains or depends on third-party software components pursuant to the following licenses:
+
+----
+Copyright (c) agglo 0.0.1
+
+Repository @
+github.com/rchipka/agglo
+
+Homepage @
+github.com/rchipka/agglo#readme
+
+----
+Acknowledgement
+Author: @rchipka
+github: https://github.com/rchipka
+npm package: agglo (https://www.npmjs.com/package/agglo)
+----
+
+

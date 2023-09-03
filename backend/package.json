@@ -1,0 +1,75 @@
+{
+  "name": "pdf2charinfo",
+  "version": "0.0.1",
+  "description": "Extracting Character info from PDF",
+  "main": "dist/pdf2charinfo.js",
+  "types": "dist/pdf2charinfo.d.ts",
+  "scripts": {
+    "prebuild": "npx rimraf dist js",
+    "build": "npx tsc; npx webpack",
+    "afm": "locate --existing *.afm | xargs awk -f scripts/afm2json.awk | sed 's/, *}}$/}}/' > scripts/system_font_info.json",
+    "test": "jest",
+    "format": "prettier --check ts/",
+    "format-fix": "prettier --write ts/",
+    "lint": "eslint ts/ --ext .ts,.tsx",
+    "lint-fix": "eslint ts/ --ext .ts,.tsx --fix",
+    "start": "nodemon scripts/server.js"
+  },
+  "maintainers": [
+    "Volker Sorge <v.sorge@progressiveaccess.com>"
+  ],
+  "bugs": {
+    "email": "v.sorge@progressiveaccess.com",
+    "url": "https://github.com/zorkow/pdf2charinfo"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zorkow/pdf2charinfo"
+  },
+  "keywords": [
+    "pdf2charinfo"
+  ],
+  "homepage": "https://github.com/zorkow/pdf2charinfo",
+  "dependencies": {
+    "@typescript-eslint/typescript-estree": "^5.28.0",
+    "bcrypt": "^5.1.1",
+    "busboy": "^1.6.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "density-clustering": "^1.3.0",
+    "dotenv": "^16.0.3",
+    "esm": "^3.2.25",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.1",
+    "monaco-editor": "^0.33.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.22",
+    "puppeteer-core": "^18.0.2",
+    "sync-sql": "^1.0.2",
+    "xml2js": "^0.4.23"
+  },
+  "devDependencies": {
+    "@babel/preset-typescript": "^7.16.7",
+    "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "circular-dependency-plugin": "^5.2.2",
+    "eslint-config-prettier": "^8.4.0",
+    "jest": "^27.5.1",
+    "jsdoc": "^3.6.10",
+    "loglevel": "^1.8.0",
+    "prettier": "^2.5.1",
+    "puppeteer": "^13.7.0",
+    "terser-webpack-plugin": "^5.3.1",
+    "ts-loader": "^9.3.0",
+    "typescript": "^4.6.4",
+    "webpack": "^5.69.1",
+    "webpack-cli": "^4.10.0"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "dist"
+  ]
+}

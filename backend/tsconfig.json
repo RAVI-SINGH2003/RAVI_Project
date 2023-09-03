@@ -1,0 +1,27 @@
+{
+  "COMPILEONSAVE": true,
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "commonjs",
+    "declaration": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "downlevelIteration": true,
+    "noLib": false,
+    "alwaysStrict": false,
+    "sourceMap": false,
+    "lib": ["es6", "dom"],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "outDir": "js",
+    "types": ["node"]
+  },
+  "include": ["ts/**/*"],
+  "exclude": [
+    "dist",
+    "js",
+    "samples",
+    "node_modules"
+  ]
+}

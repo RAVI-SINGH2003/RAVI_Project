@@ -1,0 +1,91 @@
+.image_editor {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  flex-wrap: wrap;
+}
+.image_editor .left{
+  flex: 1 1 20%;
+  max-height: 100%;
+  height: 100%;
+  overflow-x: scroll;
+  padding : 1rem;
+  padding-right: 0;
+  background-color: antiquewhite;
+}
+
+.left .row {
+  margin-bottom: 1rem;
+  max-width: 100%;
+  height: 200px;
+}
+
+.left .row img{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+.show{
+  opacity: 100%;
+}
+.hide{
+  opacity : 30%;
+}
+.image_editor .right{
+  flex: 1 1 80%;
+  height: 100%;
+  padding: 2rem;
+
+}
+.right h1{
+  text-align: center;
+  font-weight: 500;
+}
+
+.right .image_control_box{
+  /* border: 2px solid purple; */
+  width: 30vmax;
+  margin: 2rem auto;
+  border-radius: 10px;
+}
+
+.right #imageNo_span{
+  position: absolute;
+  top:10px;
+  left:10px;
+  font-weight: 400;
+  color: #fff;
+}
+.right .image_control_box .image_box{
+  background-color: white;
+  height: 300px;
+  border-radius: 10px;
+  position: relative;
+}
+
+.image_box img{
+  max-width: 100%;
+  width : 100%;
+  max-height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+.right .image_control_box .control_box{
+  padding: 2rem;
+  margin-top: 1rem;
+  background-color: rgb(206, 198, 198);
+  border-radius: 10px;
+  border-radius: 10px;
+}
+.control_box input{
+  padding: 5px;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+.control_box button{
+  margin-right: 2rem;
+  border-radius: 5px;
+  padding: 2px 5px;
+}

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
+    <script src="./settings/settings.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+    <script type="text/javascript" src="scripts/event_control.js"></script>
+
+    <title>RAVI</title>
+</head>
+<body >
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #B2DFDB;"> 
+            <div class="container-fluid">
+                <img src="Images/RAVI_AssisTech.png" alt="Ravi Assistech logo" >
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 ">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="home" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="logIssue" href="#Issue">Log Issue</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Feedback</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" tabindex="-1" aria-disabled="true">Contact us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="logout" href="#" onclick="event.preventDefault();"  tabindex="-1" aria-disabled="true">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<section class="fileupload">
+  <div class="px-4 my-5 text-center" id="btn-block">
+    <h1 class="display-5 ">Convert PDF file</h1>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4" style="padding-bottom: 5%;">Please upload a PDF format file that you want to make accessible. 
+        We request you to wait for few minutes until file is converted.</p>
+        
+        <form action="fileupload" id="fileupload1" method="post" enctype="multipart/form-data">
+
+            <input class="form-control form-control-lg" id="formFileLg" type="file" name="filetoupload" accept=".pdf" />
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-5">
+                <button type="submit" class="btn btn-primary btn-lg px-4 gap-3" id="upload" onclick = "showProgress()" style="background-color: #004D40;" disabled>Upload</button>
+            </div>
+            <div class="progress" id="myProgress" style="height:26px;width:100%" hidden>
+                <div class="progress-bar" role="progressbar" id="myBar" ></div>
+            </div>
+
+            
+            <!-- Rounded switch -->
+
+            <h5 style="display:inline" class="switch">Advance Option</h5>
+            <label class="switch" id="toggle">
+              <input type="checkbox" onclick="showAdvanceOption()">
+              <span class="slider round" align="left"> </span>
+          </label>
+
+          <div class="row" style="display:none; padding-bottom: 5%;" id="option">
+            <div class="column" style="flex: 10%;">
+            </div>
+            <div class="column" style="flex: 40%;text-align:left;padding-left: 5%;">
+                <label>Please select the nature of the document </label>
+            </div>
+            <div class="column" style="flex: 40%;">
+                <select class="form-select" aria-label="Default select example" id="nature_doc">
+                    <option selected style="color:rgb(223, 217, 217);">Select category</option>
+                    <option value="1">Research paper</option>
+                    <option value="2">Report / Book</option>
+                    <option value="3">Other</option>
+                </select>
+            </div>
+            <div class="column" style="flex: 10%;">
+            </div>
+        </div> 
+
+
+        <table class="table" id="advopt" style="display:none"> 
+            <tr>
+                <th class="first-col" style="text-align:left;padding-left: 5%;">Document Characteristics</th>
+                <th>Yes</th>
+                <th>No</th>
+                <th>Unknown</th>
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Multi column document</td>
+                <td><input type="radio" value="1" name="more-column" id="more-column-yes"/></td>
+                <td><input type="radio" value="0" name="more-column" id="more-column-no"/></td>
+                <td><input type="radio" value="2" name="more-column" id="more-column-unknown"/></td>
+
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Header</td>
+                <td><input type="radio" value="1" name="Header"id="header-yes"/></td>
+                <td><input type="radio" value="0" name="Header" id="header-no"/></td>
+                <td><input type="radio" value="2" name="Header" id="header-unknown"/></td>
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Footer</td>
+                <td><input type="radio" value="1" name="Footer" id="footer-yes"/></td>
+                <td><input type="radio" value="0" name="Footer" id="footer-no"/></td>
+                <td><input type="radio" value="2" name="Footer" id="footer-unknown"/></td>
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Figure</td>
+                <td><input type="radio" value="1" name="Figure" id="figure-yes"/></td>
+                <td><input type="radio" value="0" name="Figure"id="figure-no"/></td>
+                <td><input type="radio" value="2" name="Figure"id="figure-unknown"/></td>
+
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Caption</td>
+                <td><input type="radio" value="1" name="caption" id="caption-yes"/></td>
+                <td><input type="radio" value="0" name="caption" id="caption-no"/></td>
+                <td><input type="radio" value="2" name="caption" id="caption-unknown"/></td>
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Table</td>
+                <td><input type="radio" value="1" name="Table" id="table-yes"/></td>
+                <td><input type="radio" value="0" name="Table" id="table-no"/></td>
+                <td><input type="radio" value="2" name="Table" id="table-unknown"/></td>
+
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Watermark</td>
+                <td><input type="radio" value="1" name="Watermark" id="watermark-yes"/></td>
+                <td><input type="radio" value="0" name="Watermark" id="watermark-no"/></td>
+                <td><input type="radio" value="2" name="Watermark" id="watermark-unknown"/></td>
+
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Equations</td>
+                <td><input type="radio" value="1" name="Equations" id="eq-yes"/></td>
+                <td><input type="radio" value="0" name="Equations" id="eq-no"/></td>
+                <td><input type="radio" value="2" name="Equations" id="eq-unknown"/></td>
+
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;">Page Number</td>
+                <td><input type="radio" value="1" name="Page_no" id="page-yes"/></td>
+                <td><input type="radio" value="0" name="Page_no" id="page-no"/></td>
+                <td><input type="radio" value="2" name="Page_no" id="page-unknown"/></td>
+            </tr>
+            <tr>
+                <td class="first-col" style="text-align: left;padding-left: 5%;margin-bottom: 5%;">Table of content</td>
+                <td><input type="radio" value="1" name="Table_of_content" id="toc-yes"/></td>
+                <td><input type="radio" value="0" name="Table_of_content" id="toc-no"/></td>
+                <td><input type="radio" value="2" name="Table_of_content" id="toc-unknown"/></td>
+
+            </tr>
+        </table> 
+
+    </form>
+</div>
+</div>
+</section>
+
+<section style="padding-left: 2%;padding-right: 10%;">
+    <div class="table-responsive">
+        <table id="example" class="table table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Uploaded Pdf</th>
+                    <th>Original Output</th>
+                    <th>Modified Output</th>
+                    <th>Processed?</th>
+                    <th>Uploaded Date</th>
+                    <th>Last Modified Date</th>
+                    <th>Base Path</th>
+                    <th>Edit Output</th>
+                    <th>Download Output</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</section>
+
+<section class="Issue" id="Issue">
+   <div class="content" style="background-color: #B2DFDB;">
+    <div class="container">
+        <div class="row align-items-stretch justify-content-center no-gutters">
+            <div class="col-md-7">
+                <div class="form h-100 contact-wrap p-5">
+                    <h3 class="text-center">Log an Issue</h3>
+                    <form class="mb-5" method="post" id="contactForm" name="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="" class="col-form-label">Name *</label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Your name" required>
+                            </div>
+                            <div class="col-md-6 form-group mb-3">
+                                <label for="" class="col-form-label">Email *</label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="Your email" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 form-group mb-3">
+                                <label for="budget" class="col-form-label">File name*</label>
+                                <input type="text" class="form-control" name="subject" id="subject" placeholder="Your subject" accept=".pdf" required>
+                            </div>
+                        </div>
+                        <div class="row mb-5">
+                            <div class="col-md-12 form-group mb-3">
+                                <label for="message" class="col-form-label">Issue details *</label>
+                                <textarea class="form-control" name="message" id="message" cols="30" rows="4" placeholder="Write your message"></textarea>
+                            </div>
+                        </div>
+                        <div class="row justify-content-center">
+                          <div class="col-md-5 form-group text-center">
+                            <input type="submit" value="Submit Issue" id="isubmit" class="btn btn-block btn-primary rounded-0 py-2 px-4 " style="background-color: #004D40;">
+                            <span class="submitting"></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</section>  
+
+</body>
+</html>
